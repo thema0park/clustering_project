@@ -1,0 +1,58 @@
+#main_frame{
+    border: 3px solid white;
+    width: auto;
+    height: auto;
+}
+#container{
+    border: 3px solid white;
+    width: auto;
+    height: auto;
+}
+#scroll{
+    background-color: gray;
+    position: relative;
+    margin: 1%;
+    width: 30%;
+    height: 30px;
+    
+}
+#name_list{
+    background-color: rgb(0, 255, 149);
+    position: relative;
+    width: 10%;
+    /*추후 auto*/
+    height: 100px;
+    /* float: left; */
+    padding: 1%;
+}
+#root{
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    width: 90%;
+    /*추후 auto*/
+    height: auto;
+    /* float: left; */
+    padding: 1%;
+}
+#cluster{
+    background-color: cornflowerblue;
+    position: relative;
+    width: 90%;
+    /*추후 auto*/
+    height: auto;
+    /* float: right; */
+    padding: 1%;
+}
+#name_list, #root, #cluster{ 
+    border: 2px solid red; 
+    margin-top: 1%;
+}
+/* #root_container{
+    float:left; 
+    width:50%;
+}
+#cluster_container{
+    float:right; 
+    width:50%;
+} */
+#slider1 { width:400px; margin:0 auto; }

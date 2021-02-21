@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<title>Code_Cluster_TEST</title>
+
+<head>
+    <meta charset="utf-8">
+    <h1>Code_Cluster_TEST</h1>
+    <link rel="stylesheet" href="/css/code_cluster_style.css">
+    <link rel="stylesheet" href="//ktsmemo.cafe24.com/css/jquery-ui.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/js/FileSaver.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body id="main_frame">
+    <div id="box">
+        <!-- 될 수 있으면 value 값을 파이썬에 전송시키고 싶음. -->
+        <form action="/task_check">
+            <select name="task" , size="1">
+                <!-- 이 부분 시간 된다면 ejs로 자동으로 끌어오게 끔 만들어보자 -->
+                <option value="">과제명</option>
+                <option value="Run-length_Encoding">Run-length Encoding</option>
+                <option value="mabangjin">마방진</option>
+                <option value="password">암호문 만들기</option>
+                <option value="search_date">요일 알아보기</option>
+                <option value="find_toilet">원천관 화장실 찾기</option>
+                <option value="full_calculate">전가산기</option>
+                <option value="trace">팔달관 후문의 흔적</option>
+                <option value="pizza">피자 조각 찾기</option>
+            </select>
+            <input type="submit">
+        </form>
+    </div>
+</body>
+</html>

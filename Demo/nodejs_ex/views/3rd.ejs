@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<title>Code_Cluster_TEST</title>
+
+<head>
+    <meta charset="utf-8">
+    <h1>Code_Cluster_TEST</h1>
+    <link rel="stylesheet" href="/css/code_cluster_style.css">
+    <link rel="stylesheet" href="//ktsmemo.cafe24.com/css/jquery-ui.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body id="main_frame">
+    <div id="box">
+        <form action="/task_check">
+            <select name="task" , size="1">
+                <!-- 이 부분 시간 된다면 ejs로 자동으로 끌어오게 끔 만들어보자 -->
+                <option value=<%= current_task %>><%= current_task %></option>
+                <option value="Run-length_Encoding">Run-length Encoding</option>
+                <option value="mabangjin">마방진</option>
+                <option value="password">암호문 만들기</option>
+                <option value="search_date">요일 알아보기</option>
+                <option value="find_toilet">원천관 화장실 찾기</option>
+                <option value="full_calculate">전가산기</option>
+                <option value="trace">팔달관 후문의 흔적</option>
+                <option value="pizza">피자 조각 찾기</option>
+            </select>
+            <input type="submit">
+        </form>
+        <!-- router 파일들에게 전달할 매개체 or 아래 자바스크립트에서 꺼내 쓸 router에서 전달한 데이터 -->
+        <input type='hidden' id='sliderMax' value=<%= slide_max %>>
+        <input type='hidden' id='main_task' value=<%= current_task %>>
+    </div>
+    <div id="container">
+        <div id="slider1"></div>
+        <center>
+            <div id="sliderText">
+                스크롤 바를 움직여 Threshold를 바꿀 수 있습니다.
+            </div>
+        </center>
+    </div>
+    <div id="cluster_container">
+        <textarea id="content" readonly style="width: 30%; height: 300px;"></textarea>
+    </div>
+    <!-- 여기까지 그대로 가져오고.. -->
+    <script type='text/javascript'>
+        //과제도 선택하게하면 됨.
+        $('#slider1').slider({
+            // 최소값 (지정하지 않으면 0)
+            min: 0,
+            // 최대값 (지정하지 않으면 100) -->
+            max: $('#sliderMax').val(),
+            // 슬라이더 현재값 (지정하지 않으면 0) -->
+            value: 0,
+            // 증가하는 단계값 (지정하지 않으면 1) -->
+            step: 1,
+            // 슬라이더를 움직일때 실행할 코드 -->
+            slide: function (event, ui) {
+                /* ui.value 는 현재 슬라이더의 값 */
+                // $('#html_id').html 태그를 이용하면 html의 id에 접근해서 값을 조작할 수 있음.
+                // $('#test').load(tmp); --> ???
+                $('#sliderText').html('Threshold : ' + ui.value);
+                var value = ui.value; // threshold가 되는 값
+                var main_task = $('#main_task').val();
+                var tmp = '/threshold'
+                $.ajax({
+                    type : "GET",
+                    url : tmp, // url 요청.(url에 threshold 값이 붙어서 나갈거 같음.)
+                    data : { "threshold" : value, "task" : main_task },
+                    dataType : "JSON",
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    success : function(data){
+                        //alert("통신데이터 값 : " + data.r_c_data);
+                        var data_tmp = data.r_c_data;
+                        var path_tmp = data.r_c_path;
+                        var temp = "";
+                        for(var i=0 ; i < data_tmp.length ; i++){
+                            temp += "<div style='float:left; width:30%; heigt:500px;'><a>Cluster Size : " + data_tmp[i].length + "</a>";
+                            temp += "<textarea id = 'values" + String(i) + "' name = 'values' readonly style='width: 100%; height: 500px; margin: 1%;'>";
+                            /* for(var j=0 ; j<data[i].length ; j++){
+                                temp += data[i][j];
+                            } */
+                            temp += data_tmp[i][0]; // 대표 코드 출력(사실 각 클러스터의 처음 코드임.)
+                            temp += "</textarea>";
+                            temp += "<form id='test' action='/fourth_p' method='post'>" + "<input type='hidden' id='cluster_path' name = 'values' value=";
+                            temp += path_tmp[i];
+                            temp += ">"
+                            temp += "<input type='submit' value='더보기'></form></div>";
+                        }
+                        $('#cluster_container').empty();
+                        $('#cluster_container').append(temp);
+                        $('#cluster_container').show();
+                    },
+                    error : function(){
+                        alert("통신실패!!");
+                    }
+                 });
+            }
+        });
+    </script>
+</body>
+</html>

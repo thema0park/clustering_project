@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<title>Code_Cluster_TEST</title>
+
+<head>
+    <meta charset="utf-8">
+    <h1>Code_Cluster_TEST</h1>
+    <link rel="stylesheet" href="/css/code_cluster_style.css">
+    <link rel="stylesheet" href="//ktsmemo.cafe24.com/css/jquery-ui.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/js/FileSaver.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body id="main_frame">
+    <div id="cluster_container">
+        <% for(var x = 0 ; x < contents.length ; x++){ %>
+            <textarea id='datas' style='width: 30%; height: 500px; margin: 1%;'><%= contents[x] %></textarea> 
+        <% } %>
+    </div>
+</body>
+</html>
